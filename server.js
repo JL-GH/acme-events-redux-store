@@ -1,4 +1,5 @@
 const faker = require('faker');
+
 faker.locale = 'en_US';
 const Sequelize = require('sequelize');
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_event_store_db');
@@ -19,7 +20,7 @@ Event.createRandom = function(){ return Event.create({ name: `${faker.lorem.sent
 conn.sync({ force: true })
   .then(()=> {
     const events = [];
-    while(events.length < 10){
+    while (events.length < 10){
       events.push(Event.createRandom());
     }
     return Promise.all(events);
